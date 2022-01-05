@@ -1,0 +1,17 @@
+{
+    "header": {
+        "home": "Home",
+        "contact": "Contact"
+    },
+    "home": {
+        "hello": "Hello"
+    },
+    "contact": {
+        "contact": "Contact",
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Message",
+        "send": "Send"
+    }
+}
