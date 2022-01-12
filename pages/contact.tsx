@@ -9,70 +9,100 @@ import { useTranslations } from 'next-intl';
 
 const Contact: NextPage = () => {
 
+    const t = useTranslations('contact');
+    const [emailSend, isEmailSend] = useState('none')
+    const [emailResponse, setEmailResponse] = useState('')
+
     const validationSchema = Yup.object().shape({
         name: Yup.string()
-            .required('name is required'),
+            .required(t('errors.name')),
         email: Yup.string()
-            .required('Email is required')
-            .email('Email is invalid'),
-        subject: Yup.string().required('Subject is required'),
-        message: Yup.string().min(50).required('Message is required')
+            .required(t('errors.email'))
+            .email(t('errors.invalidEmail')),
+        subject: Yup.string().required(t('errors.subject')),
+        message: Yup.string().min(50, t('errors.messageLength')).required(t('errors.message'))
     });
 
     const formOptions = { resolver: yupResolver(validationSchema) };
     const { register, handleSubmit, reset, formState } = useForm(formOptions);
     const { errors } = formState;
-    const t = useTranslations('contact');
-
-
 
     async function onSubmit(data: any) {
         try {
             const res = await axios.post("/api/contact", data)
-            console.log(res)
+            setEmailResponse(res.data.message)
+            isEmailSend('block')
+            setTimeout(() => isEmailSend('none'), 2000);
+            reset()
             //if sucess do whatever you like, i.e toast notification
-            setTimeout(() => reset(), 2000);
         } catch (error) {
             // toast error message. whatever you wish 
+            console.log(error)
         }
     }
     return (
         <SiteLayout pageTitle='Contact'>
             <section className='w-50'>
                 <h1>{t('contact')}</h1>
-                <form onSubmit={handleSubmit(onSubmit)} className='d-flex w-50 flex-column m-auto'>
+                <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column m-auto'>
                     <label htmlFor='name' className='form-label'>{t('name')}</label>
-                    <input
-                        type='text'
-                        {...register('name')}
-                        id='name'
-                        className='form-control mb-3' />
-                    <div className="invalid-feedback">{errors.name?.message}</div>
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            type='text'
+                            {...register('name')}
+                            id='name'
+                            className='form-control mb-3' />
+                        {errors.name &&
+                            <div className="invalid-feedback form-error" style={{ display: 'flex' }}>{errors.name?.message}</div>
+                        }
+                    </div>
                     <label htmlFor='email'>{t('email')}</label>
-                    <input
-                        type='text'
-                        {...register('email')}
-                        id='email'
-                        className='form-control mb-3' />
-                    <div className="invalid-feedback">{errors.email?.message}</div>
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            type='text'
+                            {...register('email')}
+                            id='email'
+                            className='form-control mb-3' />
+                        {errors.email &&
+                            <div className="invalid-feedback form-error" style={{ display: 'flex' }}>{errors.email?.message}</div>
+                        }
+                    </div>
                     <label htmlFor='subject'>{t('subject')}</label>
-                    <input
-                        type='text'
-                        {...register('subject')}
-                        id='subject'
-                        className='form-control mb-3' />
-                    <div className="invalid-feedback">{errors.subject?.message}</div>
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            type='text'
+                            {...register('subject')}
+                            id='subject'
+                            className='form-control mb-3' />
+                        {errors.subject &&
+                            <div className="invalid-feedback form-error" style={{ display: 'flex' }}>{errors.subject?.message}</div>
+                        }
+                    </div>
                     <label htmlFor='message'>{t('message')}</label>
-                    <textarea
-                        {...register('message')}
-                        id='message'
-                        className='form-control mb-3' />
-                    <div className="invalid-feedback">{errors.message?.message}</div>
+                    <div style={{ position: 'relative' }}>
+                        <textarea
+                            {...register('message')}
+                            id='message'
+                            className='form-control mb-3' />
+                        {errors.message &&
+                            <div className="invalid-feedback form-error" style={{ display: 'flex' }}>{errors.message?.message}</div>
+                        }
+                    </div>
                     <button type='submit' className='btn btn-primary mt-3 w-25 align-self-end'>
                         {t('send')}
                     </button>
                 </form>
             </section>
+            <div className="position-fixed bottom-0 end-0 p-3">
+                <div className="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true" style={{ display: emailSend }}>
+                    <div className="d-flex">
+                        <div className="toast-body">
+                            {emailResponse}
+                        </div>
+                        <button type="button" className="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
         </SiteLayout>
     )
 }

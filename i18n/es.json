@@ -1,7 +1,8 @@
 {
     "header": {
         "home": "Inicio",
-        "contact": "Contacto"
+        "contact": "Contacto",
+        "course": "Cursos"
     },
     "home": {
         "hello": "Hola"
@@ -12,6 +13,14 @@
         "email": "Email",
         "subject": "Asunto",
         "message": "Mensaje",
-        "send": "Enviar"
+        "send": "Enviar",
+        "errors": {
+            "name": "Ingrese su nombre",
+            "email": "Ingrese una dirección de correo",
+            "invalidEmail": "Indique una dirección de correo valida",
+            "subject": "Indique el asunto de su mensaje",
+            "message": "Indique un mensaje",
+            "messageLength": "Su mensaje debe contener al menos 50 caracteres"
+        }
     }
 }

@@ -36,3 +36,8 @@ a {
   justify-content: center;
   align-items: center;
 }
+.form-error {
+  margin-top: 0;
+  position: absolute;
+  bottom: 0;
+}

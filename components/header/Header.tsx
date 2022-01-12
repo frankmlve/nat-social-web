@@ -23,6 +23,9 @@ const Header: FC<HeaderProps> = ({ classes }) => {
                             <li className='nav-item'>
                                 <AppLink href="/contact" label={t('contact')} styles={'navbar-brand'} />
                             </li>
+                            <li className='nav-item'>
+                                <AppLink href="/course" label={t('course')} styles={'navbar-brand'} />
+                            </li>
                         </ul>
                     </div>
                 </nav>
