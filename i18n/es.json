@@ -22,5 +22,20 @@
             "message": "Indique un mensaje",
             "messageLength": "Su mensaje debe contener al menos 50 caracteres"
         }
+    },
+    "register": {
+        "username": "Nombre de Usuario",
+        "email": "Email",
+        "password": "Contrasena",
+        "send": "Enviar",
+        "errors": {
+            "username": "Ingrese su nombre de usuario",
+            "email": "Ingrese una dirección de correo",
+            "invalidEmail": "Indique una dirección de correo valida",
+            "password": "Indique su contrasena",
+            "passLength": "La contrasena de tener al menos 8 caracteres",
+            "confirmPassword": "Las contrasenas deben coincidir",
+            "confirmPassReq": "Confirme su contrasena"
+        }
     }
 }

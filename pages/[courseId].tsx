@@ -3,7 +3,7 @@ import React from 'react'
 import SiteLayout from '../layouts/SiteLayout'
 
 
-const Course: NextPage = () => { 
+const Course = ({id}) => { 
 
     return (
         <SiteLayout pageTitle='Cursos'>
