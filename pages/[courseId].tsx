@@ -3,11 +3,11 @@ import React from 'react'
 import SiteLayout from '../layouts/SiteLayout'
 
 
-const Course = ({id}) => { 
+const Course = ({string: id}) => { 
 
     return (
         <SiteLayout pageTitle='Cursos'>
-            <h1>Cursos</h1>
+            <h1>Cursos {id}</h1>
         </SiteLayout>
     )
 }
